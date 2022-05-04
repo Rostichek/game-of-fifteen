@@ -6,6 +6,8 @@ Rectangle {
     property alias text: label.text
     signal clicked
 
+    state: "RELEASED"
+
     width: view.cellHeight * 1.5
 
     height: view.cellHeight / 2
@@ -13,7 +15,6 @@ Rectangle {
 
     anchors.centerIn: parent
 
-    color: "#DF863D"
     border {
         color: "#B66C2D"
         width: 2
@@ -27,8 +28,21 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        onPressed: root.state = "PRESSED"
+        onReleased: root.state = "RELEASED"
         onClicked: {
-            root.clicked()
+           root.clicked()
         }
     }
+
+    states: [
+            State {
+                name: "PRESSED"
+                PropertyChanges { target: root; color: "#E79959"}
+            },
+            State {
+                name: "RELEASED"
+                PropertyChanges { target: root; color: "#DF863D"}
+            }
+        ]
 }

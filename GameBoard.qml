@@ -36,10 +36,10 @@ Item {
 
         Component {
             id: footerComponent
-            Item{
+            Item {
                 width: board.width
                 height: root.height/4
-                Button{
+                Button {
                     text: "MIX"
                 }
             }
