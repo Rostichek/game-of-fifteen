@@ -4,6 +4,8 @@ Item {
     id: root
     property alias text: number.text
 
+    text: cell_num
+
     width: view.cellHeight
     height: view.cellHeight
 

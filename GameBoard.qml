@@ -22,7 +22,17 @@ Item {
 
             interactive: false
 
-            model: 16
+            model: ListModel {
+                id: cells_list
+
+                function fill() {
+                    for(let i = 1; i <= 16; i++)
+                        cells_list.append({ cell_num: i })
+                }
+
+                Component.onCompleted: fill()
+
+            }
 
             cellWidth: parent.width/4
             cellHeight: parent.width/4
@@ -34,12 +44,13 @@ Item {
             footer: footerComponent
         }
 
+
         Component {
             id: footerComponent
-            Item {
+            Item{
                 width: board.width
                 height: root.height/4
-                Button {
+                Button{
                     text: "MIX"
                 }
             }
