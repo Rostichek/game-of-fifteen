@@ -29,13 +29,43 @@ Item {
             model: ListModel {
                 id: cells_list
 
-                function shuffle(list) {
-                    for (var i = list.length - 1; i > 0; i--) {
-                        var j = Math.floor(Math.random() * (i + 1));
-                        var tmp = list[i];
-                        list[i] = list[j];
-                        list[j] = tmp;
+                function getInvertionsCount(list) {
+                    let counter = 0
+                    for (let i = 0; i < 15; i++) {
+                        for (let j = i + 1; j < 16; j++) {
+                            if (list[j] && list[i] && list[i] > list[j])
+                                counter++
+                        }
                     }
+                    return counter;
+                }
+
+                function findBlank (list) {
+                    for (let i = 0; i < list.length; i++)
+                        if (list[i] == '16') {
+                            return 4 - Math.floor(i/4)
+                        }
+                }
+
+                function isSolvable(list) {
+                    let invCount = getInvertionsCount(list);
+
+                    let pos = findBlank(list);
+                    if (pos & 1)
+                        return !(invCount & 1);
+                    else
+                        return invCount & 1;
+                }
+
+                function shuffle(list) {
+                    do {
+                        for (var i = list.length - 1; i > 0; i--) {
+                            var j = Math.floor(Math.random() * (i + 1));
+                            var tmp = list[i];
+                            list[i] = list[j];
+                            list[j] = tmp;
+                        }
+                    } while (!isSolvable(list))
                     return list
                 }
 
