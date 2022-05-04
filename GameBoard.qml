@@ -51,6 +51,12 @@ Item {
                     let invCount = getInvertionsCount(list);
 
                     let pos = findBlank(list);
+
+
+
+
+
+
                     if (pos & 1)
                         return !(invCount & 1);
                     else

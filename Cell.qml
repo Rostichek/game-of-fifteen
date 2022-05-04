@@ -7,6 +7,8 @@ Item {
     width: view.cellHeight
     height: view.cellHeight
 
+    visible: (text === "16") ? false : true
+
     Rectangle {
         id: cell
 
@@ -14,7 +16,7 @@ Item {
 
         anchors.fill: parent
         anchors.margins: 5
-        color: (text === "16") ? "blue" : "#DF863D"
+        color: "#DF863D"
 
         Text {
             id: number
@@ -29,6 +31,24 @@ Item {
                 pixelSize: root.width / 4
             }
         }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: cell.state = "ENTERED"
+            onExited: cell.state = "EXITED"
+        }
+
+        states: [
+                State {
+                    name: "ENTERED"
+                    PropertyChanges { target: cell; color: "#E79959"}
+                },
+                State {
+                    name: "EXITED"
+                    PropertyChanges { target: cell; color: "#DF863D"}
+                }
+            ]
     }
 }
 
