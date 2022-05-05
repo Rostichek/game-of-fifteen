@@ -3,11 +3,19 @@ import QtQuick 2.12
 Item {
     id: root
 
+    property var animDuration: 300
+
     signal shuffle
     signal moveCell(var from)
+    signal win
 
-    onShuffle: cells_list.fill()
+    onShuffle: {
+        win_msg.visible = false
+        cells_list.fill()
+    }
+
     onMoveCell: function(from) { cells_list.moveCell(from) }
+    onWin: win_msg.visible = true
 
     width: parent.width
     height: parent.width
@@ -32,6 +40,8 @@ Item {
 
             model: Field {
                 id: cells_list
+
+                onWinGame: win_msg.visible = true
             }
 
             delegate: Cell {
@@ -44,6 +54,10 @@ Item {
             footer: footerComponent
 
             move: cellsTransition
+        }
+
+        WinMsg {
+            id: win_msg
         }
     }
 
@@ -65,7 +79,7 @@ Item {
 
         NumberAnimation {
             properties: "x, y"
-            duration: 500
+            duration: animDuration
         }
     }
 }

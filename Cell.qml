@@ -11,7 +11,7 @@ Item {
     width: view.cellHeight
     height: view.cellHeight
 
-    visible: (text === "16") ? false : true
+    visible: (text == 16) ? false : true
 
     Rectangle {
         id: cell
