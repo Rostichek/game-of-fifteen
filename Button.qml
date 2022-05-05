@@ -9,7 +9,6 @@ Rectangle {
     state: "RELEASED"
 
     width: view.cellHeight * 1.5
-
     height: view.cellHeight / 2
     radius: root.width / 2
 
@@ -30,9 +29,7 @@ Rectangle {
         anchors.fill: parent
         onPressed: root.state = "PRESSED"
         onReleased: root.state = "RELEASED"
-        onClicked: {
-           root.clicked()
-        }
+        onClicked: root.clicked()
     }
 
     states: [

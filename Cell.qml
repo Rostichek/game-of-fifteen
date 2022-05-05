@@ -2,6 +2,7 @@ import QtQuick 2.12
 
 Item {
     id: root
+
     property alias text: number.text
     property var index
 
@@ -19,6 +20,7 @@ Item {
 
         anchors.fill: parent
         anchors.margins: 5
+
         color: "#DF863D"
 
         Text {
