@@ -85,11 +85,14 @@ Item {
                 }
 
                 function moveCell(index) {
-                    insert(blank_pos, get(index))
-                    setProperty(blank_pos, "ind", blank_pos)
-                    remove(blank_pos+1)
-                    setProperty(index, "cell_num", "16")
-                    blank_pos = index
+                    if(Math.abs(blank_pos - index) === 1 ||
+                            Math.abs(blank_pos - index) === 4) {
+                        insert(blank_pos, get(index))
+                        setProperty(blank_pos, "ind", blank_pos)
+                        remove(blank_pos+1)
+                        setProperty(index, "cell_num", "16")
+                        blank_pos = index
+                    }
                 }
 
                 Component.onCompleted: fill()
