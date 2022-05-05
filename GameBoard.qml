@@ -92,11 +92,11 @@ Item {
 
                 function moveCell(index) {
                     var diff = blank_pos - index
-                    if(1 === diff){
+                    if((1 === diff) && ((index + 1) % 4)){
                         move(index, blank_pos, 1)
                         syncProperties(diff, index)
                     }
-                    else if(-1 === diff){
+                    else if(-1 === diff && (index % 4)){
                         move(index, index-1, 1)
                         syncProperties(diff, index)
                     }
