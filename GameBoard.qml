@@ -4,7 +4,7 @@ Item {
     id: root
 
     signal shuffle
-    signal move(var from)
+    signal moveCell(var from)
 
 
     // property int side_size: Math.min(parent.width, parent.height)
@@ -13,7 +13,7 @@ Item {
     height: parent.width
 
     onShuffle: cells_list.fill()
-    onMove: function(from) { cells_list.move(from) }
+    onMoveCell: function(from) { cells_list.moveCell(from) }
 
     Rectangle {
         id: board
@@ -31,6 +31,8 @@ Item {
 
             model: ListModel {
                 id: cells_list
+
+                property var blank_pos
 
                 function getInvertionsCount(list) {
                     let counter = 0
@@ -77,12 +79,17 @@ Item {
                     cells_list.clear()
                     let list = shuffle([ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16' ])
                     for(let i = 0; i < 16; i++) {
+                        if(list[i] === '16') blank_pos = i
                         cells_list.append({"ind" : i, "cell_num": list[i] })
                     }
                 }
 
-                function move(index) {
-                    console.log(index)
+                function moveCell(index) {
+                    insert(blank_pos, get(index))
+                    setProperty(blank_pos, "ind", blank_pos)
+                    remove(blank_pos+1)
+                    setProperty(index, "cell_num", "16")
+                    blank_pos = index
                 }
 
                 Component.onCompleted: fill()
@@ -95,7 +102,7 @@ Item {
                 text: cell_num
                 index: ind
 
-                onClick: function(index) { root.move(index) }
+                onClick: function(index) { root.moveCell(index) }
             }
 
             footer: footerComponent
