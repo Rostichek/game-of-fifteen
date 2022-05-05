@@ -3,6 +3,9 @@ import QtQuick 2.12
 Item {
     id: root
     property alias text: number.text
+    property var index
+
+    signal click(var index)
 
     width: view.cellHeight
     height: view.cellHeight
@@ -35,6 +38,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
+            onClicked: click(index)
             onEntered: cell.state = "ENTERED"
             onExited: cell.state = "EXITED"
         }

@@ -4,6 +4,8 @@ Item {
     id: root
 
     signal shuffle
+    signal move(var from)
+
 
     // property int side_size: Math.min(parent.width, parent.height)
 
@@ -11,6 +13,7 @@ Item {
     height: parent.width
 
     onShuffle: cells_list.fill()
+    onMove: function(from) { cells_list.move(from) }
 
     Rectangle {
         id: board
@@ -52,11 +55,6 @@ Item {
 
                     let pos = findBlank(list);
 
-
-
-
-
-
                     if (pos & 1)
                         return !(invCount & 1);
                     else
@@ -78,8 +76,13 @@ Item {
                 function fill() {
                     cells_list.clear()
                     let list = shuffle([ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16' ])
-                    for(let i = 0; i < 16; i++)
-                        cells_list.append({ cell_num: list[i] })
+                    for(let i = 0; i < 16; i++) {
+                        cells_list.append({"ind" : i, "cell_num": list[i] })
+                    }
+                }
+
+                function move(index) {
+                    console.log(index)
                 }
 
                 Component.onCompleted: fill()
@@ -90,6 +93,9 @@ Item {
 
             delegate: Cell {
                 text: cell_num
+                index: ind
+
+                onClick: function(index) { root.move(index) }
             }
 
             footer: footerComponent
