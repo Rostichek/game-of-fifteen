@@ -84,14 +84,31 @@ Item {
                     }
                 }
 
+                function syncProperties(diff, index){
+                    setProperty(index, "ind", index)
+                    setProperty(blank_pos, "ind", blank_pos)
+                    blank_pos -= diff
+                }
+
                 function moveCell(index) {
-                    if(Math.abs(blank_pos - index) === 1 ||
-                            Math.abs(blank_pos - index) === 4) {
-                        insert(blank_pos, get(index))
-                        setProperty(blank_pos, "ind", blank_pos)
-                        remove(blank_pos+1)
-                        setProperty(index, "cell_num", "16")
-                        blank_pos = index
+                    var diff = blank_pos - index
+                    if(1 === diff){
+                        move(index, blank_pos, 1)
+                        syncProperties(diff, index)
+                    }
+                    else if(-1 === diff){
+                        move(index, index-1, 1)
+                        syncProperties(diff, index)
+                    }
+                    else if(-4 === diff){
+                        move(index, index-4, 1)
+                        move(blank_pos+1, index, 1)
+                        syncProperties(diff, index)
+                    }
+                    else if(4 === diff) {
+                        move(blank_pos, index, 1)
+                        move(index + 1, blank_pos, 1)
+                        syncProperties(diff, index)
                     }
                 }
 
@@ -101,12 +118,20 @@ Item {
             cellWidth: parent.width/4
             cellHeight: parent.width/4
 
+            move: Transition {
+                NumberAnimation {
+                    properties: "x, y"
+                    duration: 500
+                }
+            }
+
             delegate: Cell {
                 text: cell_num
                 index: ind
 
                 onClick: function(index) { root.moveCell(index) }
             }
+
 
             footer: footerComponent
         }
