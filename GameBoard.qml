@@ -48,7 +48,7 @@ Item {
                 text: cell_num
                 index: ind
 
-                onClick: function(index) { root.moveCell(index) }
+                onClick: function(index) { moveCell(index) }
             }
 
             footer: footerComponent
@@ -68,7 +68,7 @@ Item {
             width: board.width
             height: root.height/4
             Button{
-                onClicked: root.shuffle()
+                onClicked: shuffle()
                 text: "MIX"
             }
         }

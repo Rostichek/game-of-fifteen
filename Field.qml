@@ -18,19 +18,14 @@ ListModel {
         return counter;
     }
 
-    function findBlank (list) {
-        for (let i = 0; i < list.length; i++)
-            if (list[i] === 16) {
-                return 4 - Math.floor(i/4)
-            }
+    function findBlank () {
+        return 4 - Math.floor(blank_pos / 4)
     }
 
     function isSolvable(list) {
         let invCount = getInvertionsCount(list);
 
-        let pos = findBlank(list);
-
-        if (pos & 1)
+        if (findBlank() & 1)
             return !(invCount & 1);
         else
             return invCount & 1;
