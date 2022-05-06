@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: root
 
-    height: parent.height/3
+    height: parent.height / 3
     width: parent.width
 
     anchors.centerIn: parent

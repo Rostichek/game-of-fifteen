@@ -35,8 +35,8 @@ Item {
 
             interactive: false
 
-            cellWidth: parent.width/4
-            cellHeight: parent.width/4
+            cellWidth: parent.width / 4
+            cellHeight: parent.width / 4
 
             model: Field {
                 id: cells_list

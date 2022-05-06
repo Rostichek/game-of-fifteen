@@ -7,6 +7,9 @@ ListModel {
 
     property var blank_pos
 
+    /*!
+    *\brief Computes number of inversions in the list ([ 1, 2, 4, 3 ] - inversion is 4, 3)
+    */
     function getInvertionsCount(list) {
         let counter = 0
         for (let i = 0; i < 15; i++) {
@@ -18,10 +21,16 @@ ListModel {
         return counter;
     }
 
+    /*!
+    *\brief Returns in what row from the bottom is a blank cell
+    */
     function findBlank () {
         return 4 - Math.floor(blank_pos / 4)
     }
 
+    /*!
+    *\brief Checks can this order of cells be solved in the game of fifteen
+    */
     function isSolvable(list) {
         let invCount = getInvertionsCount(list);
 
@@ -31,6 +40,9 @@ ListModel {
             return invCount & 1;
     }
 
+    /*!
+    *\brief Shuffles list
+    */
     function shuffle(list) {
         do {
             for (var i = list.length - 1; i > 0; i--) {
@@ -43,6 +55,9 @@ ListModel {
         return list
     }
 
+    /*!
+    *\brief Fills the game field with shuffled cells
+    */
     function fill() {
         cells_list.clear()
         let list = shuffle([ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ])
@@ -52,6 +67,9 @@ ListModel {
         }
     }
 
+    /*!
+    *\brief Checks if cells are in the right order
+    */
     function isWin() {
         var win = true
         for(let i = 0; i < 14; i++) {
@@ -63,12 +81,19 @@ ListModel {
         return false
     }
 
+    /*!
+    *\brief Sets indexes of swapped cells
+    */
     function syncProperties(diff, index){
         setProperty(index, "ind", index)
         setProperty(blank_pos, "ind", blank_pos)
         blank_pos -= diff
     }
 
+
+    /*!
+    *\brief Swaps cell by index with a blank if it's possible
+    */
     function moveCell(index) {
         var diff = blank_pos - index
         if((1 === diff) && ((index + 1) % 4)){
