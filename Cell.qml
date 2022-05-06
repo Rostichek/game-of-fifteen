@@ -4,14 +4,13 @@ Item {
     id: root
 
     property alias text: number.text
-    property var index
 
     signal click(var index)
 
     width: view.cellHeight
     height: view.cellHeight
 
-    visible: (text === 16) ? false : true
+    visible: (text === "16") ? false : true
 
     Rectangle {
         id: cell

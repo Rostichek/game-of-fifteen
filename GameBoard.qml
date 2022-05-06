@@ -1,21 +1,22 @@
 import QtQuick 2.12
+import Field 1.0
 
 Item {
     id: root
 
-    property var animDuration: 300
+    property int animDuration: 300
 
-    signal shuffle
-    signal moveCell(var from)
-    signal win
+    //    signal shuffle
+    //    signal moveCell(var from)
+    //    signal win
 
-    onShuffle: {
-        win_msg.visible = false
-        cells_list.fill()
-    }
+    //    onShuffle: {
+    //        win_msg.visible = false
+    //        cells_list.fill()
+    //    }
 
-    onMoveCell: function(from) { cells_list.moveCell(from) }
-    onWin: win_msg.visible = true
+    //    onMoveCell: function(from) { cells_list.moveCell(from) }
+    //    onWin: win_msg.visible = true
 
     width: parent.width
     height: parent.width
@@ -38,17 +39,16 @@ Item {
             cellWidth: parent.width / 4
             cellHeight: parent.width / 4
 
-            model: Field {
+            model: FieldModel {
                 id: cells_list
 
-                onWinGame: win_msg.visible = true
+                //                onWinGame: win_msg.visible = true
             }
 
             delegate: Cell {
-                text: cell_num
-                index: ind
+                text: display
 
-                onClick: function(index) { moveCell(index) }
+                onClick: cells_list.move(index)
             }
 
             footer: footerComponent
@@ -68,7 +68,7 @@ Item {
             width: board.width
             height: root.height/4
             Button{
-                onClicked: shuffle()
+                onClicked: cells_list.shuffle()
                 text: "MIX"
             }
         }
