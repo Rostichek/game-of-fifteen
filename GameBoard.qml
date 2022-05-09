@@ -5,18 +5,6 @@ Item {
 
     property var animDuration: 300
 
-    signal shuffle
-    signal moveCell(var from)
-    signal win
-
-    onShuffle: {
-        win_msg.visible = false
-        cells_list.fill()
-    }
-
-    onMoveCell: function(from) { cells_list.moveCell(from) }
-    onWin: win_msg.visible = true
-
     width: parent.width
     height: parent.width
 
@@ -48,7 +36,9 @@ Item {
                 text: cell_num
                 index: ind
 
-                onClick: function(index) { moveCell(index) }
+                onClick: function (index) {
+                    cells_list.moveCell(index)
+                }
             }
 
             footer: footerComponent
@@ -64,11 +54,14 @@ Item {
     Component {
         id: footerComponent
 
-        Item{
+        Item {
             width: board.width
-            height: root.height/4
-            Button{
-                onClicked: shuffle()
+            height: root.height / 4
+            Button {
+                onClicked: {
+                    win_msg.visible = false
+                    cells_list.fill()
+                }
                 text: "MIX"
             }
         }

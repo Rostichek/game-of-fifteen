@@ -11,7 +11,7 @@ Item {
     width: view.cellHeight
     height: view.cellHeight
 
-    visible: (text === 16) ? false : true
+    visible: (text == 16) ? false : true
 
     Rectangle {
         id: cell
@@ -46,15 +46,20 @@ Item {
         }
 
         states: [
-                State {
-                    name: "ENTERED"
-                    PropertyChanges { target: cell; color: "#E79959"}
-                },
-                State {
-                    name: "EXITED"
-                    PropertyChanges { target: cell; color: "#DF863D"}
+            State {
+                name: "ENTERED"
+                PropertyChanges {
+                    target: cell
+                    color: "#E79959"
                 }
-            ]
+            },
+            State {
+                name: "EXITED"
+                PropertyChanges {
+                    target: cell
+                    color: "#DF863D"
+                }
+            }
+        ]
     }
 }
-
