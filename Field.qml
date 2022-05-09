@@ -72,7 +72,7 @@ ListModel {
             list[i] = i + 1
         list = shuffle(list)
 
-        for (var i = 0; i < list.length; i++) {
+        for (i = 0; i < list.length; i++) {
             if (list[i] === field_size * field_size)
                 blank_pos = i
             cells_list.append({
