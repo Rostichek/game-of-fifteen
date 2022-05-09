@@ -55,21 +55,21 @@ void Field::move(const int index) {
 
     int diff = blank_pos - index;
 
-    if((1 == diff) && ((index + 1) % field_size)) {
+    if ((1 == diff) && ((index + 1) % field_size)) {
         beginMoveRows(QModelIndex(), index, index, QModelIndex(), blank_pos+1);
         swapRows();
     }
-    else if(-1 == diff && (index % field_size)) {
+    else if (-1 == diff && (index % field_size)) {
         beginMoveRows(QModelIndex(), index, index, QModelIndex(), blank_pos);
         swapRows();
     }
-    else if(-field_size == diff) {
+    else if (-field_size == diff) {
         beginMoveRows(QModelIndex(), index, index, QModelIndex(), index-4);
         endMoveRows();
         beginMoveRows(QModelIndex(), blank_pos + 1, blank_pos + 1, QModelIndex(), index + 1);
         swapRows();
     }
-    else if(field_size == diff) {
+    else if (field_size == diff) {
         beginMoveRows(QModelIndex(), index, index, QModelIndex(), blank_pos + 1);
         endMoveRows();
         beginMoveRows(QModelIndex(), blank_pos - 1, blank_pos - 1, QModelIndex(), index);
@@ -81,8 +81,8 @@ void Field::move(const int index) {
 
 bool Field::isSolved() const {
     bool is_win { true };
-    for(size_t i = 0; i < cells.size() - 2; i++)
-        if(cells.at(i) > cells.at(i+1))
+    for (size_t i = 0; i < cells.size() - 2; i++)
+        if (cells.at(i) > cells.at(i+1))
             is_win = false;
 
     if(is_win && cells.back() == cells.size()) {

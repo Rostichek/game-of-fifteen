@@ -38,7 +38,8 @@ private:
     bool isSolved() const;
     size_t getInvertionsCount() const;
     size_t findBlankRow() const;
-
 };
+
+
 
 #endif // FIELD_H
