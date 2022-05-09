@@ -41,8 +41,8 @@ Item {
 
             model: FieldModel {
                 id: cells_list
-
-                //                onWinGame: win_msg.visible = true
+                onShowWinMsg: win_msg.visible = true
+                onCloseWinMsg: win_msg.visible = false
             }
 
             delegate: Cell {

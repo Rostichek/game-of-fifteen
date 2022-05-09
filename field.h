@@ -19,12 +19,15 @@ public:
     Q_INVOKABLE void shuffle();
     Q_INVOKABLE void move(const int index);
 
+Q_SIGNALS:
+        void showWinMsg() const;
+        void closeWinMsg() const;
 
 public:
     using Cell = int;
 
 private:
-    const size_t field_size { 4 };
+    const size_t field_size;
     size_t blank_pos { 0 };
     std::vector<Cell> cells;
 
@@ -32,6 +35,7 @@ private:
     void addCells();
 
     bool isSolvable() const;
+    bool isSolved() const;
     size_t getInvertionsCount() const;
     size_t findBlankRow() const;
 
